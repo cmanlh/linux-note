@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Chapter 1</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="arch_linux_install.html"><strong aria-hidden="true">1.</strong> 安装Arch Linux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 安装盘制作</a></li><li class="chapter-item expanded "><a href="arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 内核镜像安装</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -161,7 +161,60 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#chapter-1" id="chapter-1">Chapter 1</a></h1>
+                        <h2><a class="header" href="#安装arch-linux" id="安装arch-linux">安装Arch Linux</a></h2>
+<p>wiki上已有详细的<a href="https://wiki.archlinux.org/index.php/Installation_guide#Pre-installation">安装指引</a>，这儿就只记录关键点和心得。</p>
+<h2><a class="header" href="#安装盘制作" id="安装盘制作">安装盘制作</a></h2>
+<p><a href="https://www.archlinux.org">Arch Linux</a>安装镜像仅包含内核，其余组件均能在系统安装成功后方便的通过<a href="https://wiki.archlinux.org/index.php/Pacman">pacman</a>安装，并且官方还维护了一个非常齐全的<a href="https://wiki.archlinux.org">Wiki</a>，所以使得archlinux成为了非常好的Linux学习及使用的发行版。</p>
+<p>镜像文件可以从国内的镜像站下载，那样下载速度会快很多。网址可以通过<a href="https://www.archlinux.org/download">官方下载指引网站</a> 获得。</p>
+<p>推荐下载源：<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">清华大学开源镜像站</a></p>
+<h4><a class="header" href="#制作安装盘的工具" id="制作安装盘的工具">制作安装盘的工具</a></h4>
+<p>各大操作系统平台均有相应的制作工具</p>
+<ul>
+<li>windows平台 : <a href="https://rufus.ie">rufus</a></li>
+<li>linux平台 : <a href="https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html">dd</a></li>
+<li>其他平台可直接参考<a href="https://wiki.archlinux.org/index.php/USB_flash_installation_medium">官方指引</a></li>
+</ul>
+<h2><a class="header" href="#内核镜像安装" id="内核镜像安装">内核镜像安装</a></h2>
+<blockquote>
+<p>基本参照<a href="https://wiki.archlinux.org/index.php/Installation_guide">官方指引</a></p>
+</blockquote>
+<h4><a class="header" href="#登录archlinux" id="登录archlinux">登录ArchLinux</a></h4>
+<p>通过BIOS设置从USB启动，或者直接通过GRUB引导界面选择USB启动进入Arch Linux系统。</p>
+<h4><a class="header" href="#时间同步" id="时间同步">时间同步</a></h4>
+<p><code>timedatectl set -ntp true</code></p>
+<h4><a class="header" href="#硬盘分区" id="硬盘分区">硬盘分区</a></h4>
+<p>执行命令<code># ls /sys/firmware/efi/efivars</code>看看是否报错。如果不报错，就选择 <em>EFI with GPT</em>，否则就选择 <em>MBR with BIOS</em>。</p>
+<p>现在的主板基本都支持EFI，小黑T430也不例外。按照官方指引，基本就分三个区，可以使用<code># fdisk /dev/xxx</code>执行：</p>
+<ul>
+<li>EFI分区
+<ul>
+<li>分区类型选择efi，<code>fdisk</code>过程中，执行<code>t</code>命令进行选择即可。</li>
+<li>分区大小为260M。</li>
+<li>必须选择FAT32文件系统格式，在分区完毕后执行<code>mkfs.fat -F32 /dev/sdxY</code>。</li>
+<li>承担系统启动引导作用。</li>
+</ul>
+</li>
+<li>SWAP分区
+<ul>
+<li>分区类型选择Linux Swap。</li>
+<li>分区大小大于512M，小于等于物理内存大小。</li>
+<li>文件系统格式通过<code>mkswap /dev/sdxY</code>赋予，格式化为Swap分区特有文件系统格式。</li>
+<li>当内存紧张时，系统可将闲置程序的内存数据存放到该分区，从而缓解内存困境。如果物理内存够大，可以不需要该区。</li>
+</ul>
+</li>
+<li>root分区
+<ul>
+<li>分区类型选择Linux Root(X86_64)，系统架构不同，可以根据实际架构进行选择。</li>
+<li>剩余的硬盘空间，当然也可以根据实际需要，按照系统目录功能特点，多划分几个分区。</li>
+<li>文件系统格式建议使用ext4，通过<code>mkfs.ext4 /dev/sdxY</code>进行格式化。</li>
+<li>系统分区，存放操作系统及所有其他后续文件。</li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#pacman镜像源选择" id="pacman镜像源选择">Pacman镜像源选择</a></h4>
+<p>官方源下载速度非常慢，但Arch Linux官方非常贴心的已经将各国的源都已收集保存在了<code>/etc/pacman.d/mirrorlist</code>配置文件，找到中国的源，将其移到文件顶部即可。其中，清华、交大和中软的源比较好用，建议特别置顶。</p>
+<h4><a class="header" href="#" id=""></a></h4>
+<h4><a class="header" href="#网络" id="网络">网络</a></h4>
 
                     </main>
 
@@ -184,6 +237,21 @@
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
