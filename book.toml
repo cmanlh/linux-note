@@ -1,0 +1,6 @@
+[book]
+authors = ["lh"]
+language = "zh"
+multilingual = false
+src = "src"
+title = "Linux学习及使用笔记"
