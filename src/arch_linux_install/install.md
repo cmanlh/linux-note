@@ -27,10 +27,58 @@
   * 文件系统格式建议使用ext4，通过`mkfs.ext4 /dev/sdxY`进行格式化。
   * 系统分区，存放操作系统及所有其他后续文件。
 
+#### 挂载分区
+* 挂载主分区，`# mount /dev/root_partition /mnt`
+* 挂载EFI
+  * 先创建efi目录，`# mkdir /mnt/efi`
+  * 挂载，`mount /dev/efi_partition /mnt/efi`
+* 挂载Swap，`# mkswap /dev/swap_partition`
+
 #### Pacman镜像源选择
 官方源下载速度非常慢，但Arch Linux官方非常贴心的已经将各国的源都已收集保存在了`/etc/pacman.d/mirrorlist`配置文件，找到中国的源，将其移到文件顶部即可。其中，清华、交大和中软的源比较好用，建议特别置顶。
 
-#### 
+#### 安装
+`# pacstrap /mnt base linux linux-firmware man base-devel vim` 
+
+#### 保存分区挂载信息
+`# genfstab -U /mnt >> /mnt/etc/fstab`
+
+#### 切换系统
+`# arch-chroot /mnt`
+执行这部后，就算正式切到电脑新安装的系统上了。
+
+> 接下来，进行系统设置
+
+#### 时间设置
+* 时区 `# ln -sf /usr/share/zoneifo/Asia/Shanghai /etc/localtime`
+* 时间校准 `hwclock --systohc`
+
+#### 区域字体、编码设置
+* `# vim /etc/locale.gen` 注释掉需要支持的区域编码。如：`en_US.UTF-8 UTF-8`，`zh_CN.UTF-8 UTF-8`
+* `# locale-gen`
+* `# vim /etc/locale.conf` 添加`LANG=en_US.UTF-8`
 
 #### 网络
+* `# vim /etc/hostname` 添加自己想要的主机名就行。
+* `# vim /etc/hosts`，添加如下信息：
+```
+127.0.0.1	localhost
+::1		localhost
+127.0.0.1	myhostname.localdomain myhostname
+```
+* 安装dhcp服务软件，要不然移除U盘重启后，需要手动配置非常复杂的网络设置才能联网。
+  * `# pacman -S dhcpcd`
+* 将该服务配置为系统服务，这样以后系统重启后，网络将自动配置好。
+  * `# systemctl enable dhcpcd.service`
 
+#### 设置root密码
+`# passwd`
+
+#### 制作启动引导界面
+* 安装必要组件：`# pacman -S grub efibootmgr`
+* `# grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB`
+* `# grub-mkconfig -o /boot/grub/grub.cfg`
+
+#### 完成内核安装，重启系统
+* `# exit`
+* `# reboot`

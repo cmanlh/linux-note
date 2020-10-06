@@ -211,10 +211,74 @@
 </ul>
 </li>
 </ul>
+<h4><a class="header" href="#挂载分区" id="挂载分区">挂载分区</a></h4>
+<ul>
+<li>挂载主分区，<code># mount /dev/root_partition /mnt</code></li>
+<li>挂载EFI
+<ul>
+<li>先创建efi目录，<code># mkdir /mnt/efi</code></li>
+<li>挂载，<code>mount /dev/efi_partition /mnt/efi</code></li>
+</ul>
+</li>
+<li>挂载Swap，<code># mkswap /dev/swap_partition</code></li>
+</ul>
 <h4><a class="header" href="#pacman镜像源选择" id="pacman镜像源选择">Pacman镜像源选择</a></h4>
 <p>官方源下载速度非常慢，但Arch Linux官方非常贴心的已经将各国的源都已收集保存在了<code>/etc/pacman.d/mirrorlist</code>配置文件，找到中国的源，将其移到文件顶部即可。其中，清华、交大和中软的源比较好用，建议特别置顶。</p>
-<h4><a class="header" href="#" id=""></a></h4>
+<h4><a class="header" href="#安装" id="安装">安装</a></h4>
+<p><code># pacstrap /mnt base linux linux-firmware man base-devel vim</code> </p>
+<h4><a class="header" href="#保存分区挂载信息" id="保存分区挂载信息">保存分区挂载信息</a></h4>
+<p><code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code></p>
+<h4><a class="header" href="#切换系统" id="切换系统">切换系统</a></h4>
+<p><code># arch-chroot /mnt</code>
+执行这部后，就算正式切到电脑新安装的系统上了。</p>
+<blockquote>
+<p>接下来，进行系统设置</p>
+</blockquote>
+<h4><a class="header" href="#时间设置" id="时间设置">时间设置</a></h4>
+<ul>
+<li>时区 <code># ln -sf /usr/share/zoneifo/Asia/Shanghai /etc/localtime</code></li>
+<li>时间校准 <code>hwclock --systohc</code></li>
+</ul>
+<h4><a class="header" href="#区域字体编码设置" id="区域字体编码设置">区域字体、编码设置</a></h4>
+<ul>
+<li><code># vim /etc/locale.gen</code> 注释掉需要支持的区域编码。如：<code>en_US.UTF-8 UTF-8</code>，<code>zh_CN.UTF-8 UTF-8</code></li>
+<li><code># locale-gen</code></li>
+<li><code># vim /etc/locale.conf</code> 添加<code>LANG=en_US.UTF-8</code></li>
+</ul>
 <h4><a class="header" href="#网络" id="网络">网络</a></h4>
+<ul>
+<li><code># vim /etc/hostname</code> 添加自己想要的主机名就行。</li>
+<li><code># vim /etc/hosts</code>，添加如下信息：</li>
+</ul>
+<pre><code>127.0.0.1	localhost
+::1		localhost
+127.0.0.1	myhostname.localdomain myhostname
+</code></pre>
+<ul>
+<li>安装dhcp服务软件，要不然移除U盘重启后，需要手动配置非常复杂的网络设置才能联网。
+<ul>
+<li><code># pacman -S dhcpcd</code></li>
+</ul>
+</li>
+<li>将该服务配置为系统服务，这样以后系统重启后，网络将自动配置好。
+<ul>
+<li><code># systemctl enable dhcpcd.service</code></li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#设置root密码" id="设置root密码">设置root密码</a></h4>
+<p><code># passwd</code></p>
+<h4><a class="header" href="#制作启动引导界面" id="制作启动引导界面">制作启动引导界面</a></h4>
+<ul>
+<li>安装必要组件：<code># pacman -S grub efibootmgr</code></li>
+<li><code># grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB</code></li>
+<li><code># grub-mkconfig -o /boot/grub/grub.cfg</code></li>
+</ul>
+<h4><a class="header" href="#完成内核安装重启系统" id="完成内核安装重启系统">完成内核安装，重启系统</a></h4>
+<ul>
+<li><code># exit</code></li>
+<li><code># reboot</code></li>
+</ul>
 
                     </main>
 
