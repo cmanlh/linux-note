@@ -1,4 +1,4 @@
-## 安装盘制作
+## 制作安装盘
 
 [Arch Linux](https://www.archlinux.org)安装镜像仅包含内核，其余组件均能在系统安装成功后方便的通过[pacman](https://wiki.archlinux.org/index.php/Pacman)安装，并且官方还维护了一个非常齐全的[Wiki](https://wiki.archlinux.org)，所以使得archlinux成为了非常好的Linux学习及使用的发行版。
 

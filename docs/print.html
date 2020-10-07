@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="arch_linux_install.html"><strong aria-hidden="true">1.</strong> 安装Arch Linux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 安装盘制作</a></li><li class="chapter-item expanded "><a href="arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 内核镜像安装</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="arch_linux_install.html"><strong aria-hidden="true">1.</strong> Arch Linux安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 制作安装盘</a></li><li class="chapter-item expanded "><a href="arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 安装内核镜像</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows.html"><strong aria-hidden="true">1.3.</strong> 安装窗口系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/xorg.html"><strong aria-hidden="true">1.3.1.</strong> 安装Xorg</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/driver.html"><strong aria-hidden="true">1.3.2.</strong> 安装显卡驱动</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/font.html"><strong aria-hidden="true">1.3.3.</strong> 安装字体</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/dwm.html"><strong aria-hidden="true">1.3.4.</strong> 安装dwm</a></li></ol></li><li class="chapter-item expanded "><a href="arch_linux_install/input_method.html"><strong aria-hidden="true">1.4.</strong> 安装输入法</a></li><li class="chapter-item expanded "><a href="arch_linux_install/audio.html"><strong aria-hidden="true">1.5.</strong> 安装声音相关控件</a></li><li class="chapter-item expanded "><a href="arch_linux_install/browser.html"><strong aria-hidden="true">1.6.</strong> 安装浏览器</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -161,9 +161,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2><a class="header" href="#安装arch-linux" id="安装arch-linux">安装Arch Linux</a></h2>
+                        <h2><a class="header" href="#arch-linux安装" id="arch-linux安装">Arch Linux安装</a></h2>
 <p>wiki上已有详细的<a href="https://wiki.archlinux.org/index.php/Installation_guide#Pre-installation">安装指引</a>，这儿就只记录关键点和心得。</p>
-<h2><a class="header" href="#安装盘制作" id="安装盘制作">安装盘制作</a></h2>
+<p>本手册非通用的系统定制的安装说明，仅记录本人个性化定制的过程。</p>
+<p>所以该手册仅涉及以下内容安装：</p>
+<ul>
+<li>linux内核</li>
+<li>网络：现代，没网啥都干不了。</li>
+<li>文本编辑：必备工具之一，要不然本文都写不了。本人使用Vim，这个安装内核时会顺带一起装了。</li>
+<li>文件浏览：命令行浏览文件，有时不太方便。所以一个顺手的文件浏览器还是很有必要的。这儿推荐<a href="https://ranger.github.io">Ranger</a>。</li>
+<li>窗口管理：桌面系统太过庞大，很多东西也用不上，而且窗口管理器<a href="https://dwm.suckless.org/">DWM</a>太顺我心了，DWM+VIM+Ranger，使用感觉6到飞。</li>
+<li>输入法：fcitx</li>
+<li>声音：声音还是有必要的，毕竟得B站学习看视频。</li>
+<li>网页浏览：chromium</li>
+</ul>
+<h2><a class="header" href="#制作安装盘" id="制作安装盘">制作安装盘</a></h2>
 <p><a href="https://www.archlinux.org">Arch Linux</a>安装镜像仅包含内核，其余组件均能在系统安装成功后方便的通过<a href="https://wiki.archlinux.org/index.php/Pacman">pacman</a>安装，并且官方还维护了一个非常齐全的<a href="https://wiki.archlinux.org">Wiki</a>，所以使得archlinux成为了非常好的Linux学习及使用的发行版。</p>
 <p>镜像文件可以从国内的镜像站下载，那样下载速度会快很多。网址可以通过<a href="https://www.archlinux.org/download">官方下载指引网站</a> 获得。</p>
 <p>推荐下载源：<a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest/">清华大学开源镜像站</a></p>
@@ -174,7 +186,7 @@
 <li>linux平台 : <a href="https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html">dd</a></li>
 <li>其他平台可直接参考<a href="https://wiki.archlinux.org/index.php/USB_flash_installation_medium">官方指引</a></li>
 </ul>
-<h2><a class="header" href="#内核镜像安装" id="内核镜像安装">内核镜像安装</a></h2>
+<h2><a class="header" href="#安装内核镜像" id="安装内核镜像">安装内核镜像</a></h2>
 <blockquote>
 <p>基本参照<a href="https://wiki.archlinux.org/index.php/Installation_guide">官方指引</a></p>
 </blockquote>
@@ -205,7 +217,7 @@
 <li>root分区
 <ul>
 <li>分区类型选择Linux Root(X86_64)，系统架构不同，可以根据实际架构进行选择。</li>
-<li>剩余的硬盘空间，当然也可以根据实际需要，按照系统目录功能特点，多划分几个分区。</li>
+<li>剩余的硬盘空间。当然也可以根据实际需要，按照系统目录功能特点，多划分几个分区。</li>
 <li>文件系统格式建议使用ext4，通过<code>mkfs.ext4 /dev/sdxY</code>进行格式化。</li>
 <li>系统分区，存放操作系统及所有其他后续文件。</li>
 </ul>
@@ -230,7 +242,7 @@
 <p><code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code></p>
 <h4><a class="header" href="#切换系统" id="切换系统">切换系统</a></h4>
 <p><code># arch-chroot /mnt</code>
-执行这部后，就算正式切到电脑新安装的系统上了。</p>
+执行这步后，就算正式切到电脑新安装的系统上了。</p>
 <blockquote>
 <p>接下来，进行系统设置</p>
 </blockquote>
@@ -253,6 +265,8 @@
 <pre><code>127.0.0.1	localhost
 ::1		localhost
 127.0.0.1	myhostname.localdomain myhostname
+
+# 其中，myhostname替换为上一步设置的主机名
 </code></pre>
 <ul>
 <li>安装dhcp服务软件，要不然移除U盘重启后，需要手动配置非常复杂的网络设置才能联网。
@@ -279,6 +293,40 @@
 <li><code># exit</code></li>
 <li><code># reboot</code></li>
 </ul>
+<h2><a class="header" href="#安装窗口系统" id="安装窗口系统">安装窗口系统</a></h2>
+<p>有了窗口系统，才能使用必要的GUI组件，才能方便地进行多窗口操作。但个人又不需要窗口系统之上的桌面集成环境，所以仅止于窗口系统。</p>
+<p>但其实熟悉了窗口系统及窗口管理环境后，也就意味着可以完全自定义“桌面集成环境”了。</p>
+<p><a href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation">Arch Linux 官方安装指引</a></p>
+<h2><a class="header" href="#安装xorg" id="安装xorg">安装Xorg</a></h2>
+<p>Xorg是X Window System的一个开源实现，目前大部分的窗口管理器或者桌面系统都是基于其实现的。</p>
+<p>其中，Xorg大部分组件也用不上，安装窗口服务组件即可，后续其他GUI软件依赖的，可以按需通过Pacman安装即可，所以安装就很简单了。</p>
+<p><code># pacman -S xorg-server xorg-xinit</code></p>
+<p>其中，xorg-xinit为Xorg的启动程序，后面会用到。</p>
+<h2><a class="header" href="#安装显卡驱动" id="安装显卡驱动">安装显卡驱动</a></h2>
+<p>现在Linux的生态比以前好太多了，以前使用Linux系统的两大困难就是少驱动和少软件。少驱动，系统起不来；少软件，很多事干不了。而现在，甚至连N卡都已经有官方驱动了。幸福。</p>
+<p>确定显卡类型：</p>
+<p><code># lspci | grep -e VGA -e 3D</code></p>
+<p>如果有多块显卡，又都需要用到的话，就都安装，否则一般选择主板集成的显卡即可。T430有一块Intel的集成显卡、一块Nvidia的独立显卡。独立显卡用不上，所以直接通过主板BIOS禁用了。如果BIOS没有提供相应选项，也可执行以下操作停用对应卡。</p>
+<ul>
+<li>系统启动时，不加载内核自带的对应显卡驱动</li>
+</ul>
+<p><code># vim /etc/modprobe.d/blacklist.conf // 文件名任意</code></p>
+<p><code>blacklist nouveau // N卡的开源驱动组件模块为nouveau，禁用即可</code></p>
+<ul>
+<li>移除加载的显卡设备</li>
+</ul>
+<p><code># echo 1 &gt; /sys/devices/pci0000:00/显卡设备路径/remove</code></p>
+<p>所以，仅需安装集成的Intel显卡驱动</p>
+<p><code># pacman -S xf86-video-intel</code></p>
+<h2><a class="header" href="#安装字体" id="安装字体">安装字体</a></h2>
+<p>没有完备的字体，软件、网页都会显示不正常，甚至Xorg都起不来。而好的字体，可以让人赏心悦目。</p>
+<p>所以，Xorg全家桶字体是必须的，然后是各种让人赏心悦目的字体。<a href="https://wiki.archlinux.org/index.php/Fonts">Arch Linux官方</a>列出了不少字体，可以根据需要自行选择。</p>
+<p>字体安装如下：</p>
+<p><code>pacman -S xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-alias-100dpi xorg-fonts-alias-75dpi xorg-fonts-alias-cyrillic xorg-fonts-alias-misc xorg-fonts-cyrillic xorg-fonts-encodings xorg-fonts-misc xorg-fonts-type1 gnu-free-fonts ttf-ubuntu-font-family ttf-anonymous-pro adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts adobe-source-han-sans-cn-fonts adobe-source-han-sans-hk-fonts adobe-source-han-sans-tw-fonts adobe-source-han-serif-cn-fonts adobe-source-han-serif-tw-fonts wqy-bitmapfont wqy-microhei wqy-microhei-lite wqy-zenhei</code></p>
+<h1><a class="header" href="#安装dwm" id="安装dwm">安装dwm</a></h1>
+<h1><a class="header" href="#安装输入法" id="安装输入法">安装输入法</a></h1>
+<h1><a class="header" href="#安装声音相关控件" id="安装声音相关控件">安装声音相关控件</a></h1>
+<h1><a class="header" href="#安装浏览器" id="安装浏览器">安装浏览器</a></h1>
 
                     </main>
 
