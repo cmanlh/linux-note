@@ -3,10 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
+        <title>Linux内核模块 - Linux学习及使用笔记</title>
         
-        
-        <base href="/">
         
 
 
@@ -95,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="arch_linux_install.html"><strong aria-hidden="true">1.</strong> Arch Linux安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 制作安装盘</a></li><li class="chapter-item expanded "><a href="arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 安装内核镜像</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows.html"><strong aria-hidden="true">1.3.</strong> 安装窗口系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/xorg.html"><strong aria-hidden="true">1.3.1.</strong> 安装Xorg</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/driver.html"><strong aria-hidden="true">1.3.2.</strong> 安装显卡驱动</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/font.html"><strong aria-hidden="true">1.3.3.</strong> 安装字体</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/dwm.html"><strong aria-hidden="true">1.3.4.</strong> 安装dwm</a></li></ol></li><li class="chapter-item expanded "><a href="arch_linux_install/input_method.html"><strong aria-hidden="true">1.4.</strong> 安装输入法</a></li><li class="chapter-item expanded "><a href="arch_linux_install/audio.html"><strong aria-hidden="true">1.5.</strong> 安装声音相关控件</a></li><li class="chapter-item expanded "><a href="arch_linux_install/browser.html"><strong aria-hidden="true">1.6.</strong> 安装浏览器</a></li></ol></li><li class="chapter-item expanded "><a href="kernel_module.html"><strong aria-hidden="true">2.</strong> Linux内核模块</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="arch_linux_install.html"><strong aria-hidden="true">1.</strong> Arch Linux安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 制作安装盘</a></li><li class="chapter-item expanded "><a href="arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 安装内核镜像</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows.html"><strong aria-hidden="true">1.3.</strong> 安装窗口系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/xorg.html"><strong aria-hidden="true">1.3.1.</strong> 安装Xorg</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/driver.html"><strong aria-hidden="true">1.3.2.</strong> 安装显卡驱动</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/font.html"><strong aria-hidden="true">1.3.3.</strong> 安装字体</a></li><li class="chapter-item expanded "><a href="arch_linux_install/xwindows/dwm.html"><strong aria-hidden="true">1.3.4.</strong> 安装dwm</a></li></ol></li><li class="chapter-item expanded "><a href="arch_linux_install/input_method.html"><strong aria-hidden="true">1.4.</strong> 安装输入法</a></li><li class="chapter-item expanded "><a href="arch_linux_install/audio.html"><strong aria-hidden="true">1.5.</strong> 安装声音相关控件</a></li><li class="chapter-item expanded "><a href="arch_linux_install/browser.html"><strong aria-hidden="true">1.6.</strong> 安装浏览器</a></li></ol></li><li class="chapter-item expanded "><a href="kernel_module.html" class="active"><strong aria-hidden="true">2.</strong> Linux内核模块</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -161,13 +159,94 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#document-not-found-404" id="document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h2><a class="header" href="#linux内核模块" id="linux内核模块">Linux内核模块</a></h2>
+<p>内核模块分为内置模块和动态模块，一般在系统启动时加载。其中，动态模块可以在运行时<a href="https://wiki.archlinux.org/index.php/Kernel_module">动态的加载和卸载</a>。</p>
+<p>模块文件存放在/usr/lib/modules/_kernel_release_目录下，其中_kernel_release_可以通过命令<code># uname -r</code>获取。</p>
+<p><code># lsmod</code>列出当前系统加载的模块。</p>
+<p><code># modinfo module_name</code>查看模块信息</p>
+<p>因为很多模块都提供了调用接口，特别是驱动程序，使得我们可以更方便地控制自己的系统。而怎么启用接口以及如何调用，就可以通过上面的查看了解。</p>
+<p>T430风扇转速的自动管理一直不是很合心意，即使键盘面板摸着很烫手了，风扇转速也不会自动往上调整，所以偶尔想手动把转速提高。</p>
+<p>T430的<a href="https://uefi.org/acpi/specs">ACPI</a>有模块thinkpad_acpi实现，所以操作如下：</p>
+<p><code># cat /proc/acpi/ibm/fan</code></p>
+<p>看到如下信息：</p>
+<pre><code>status:         enabled
+speed:          0
+level:          auto
+</code></pre>
+<p>以上内容逐行说明了以下信息：</p>
+<ul>
+<li>风扇启用</li>
+<li>风扇转速为0</li>
+<li>风扇处于自动运行模式</li>
+</ul>
+<p>没有任何接口调用的信息，这时就需要执行下面命令查看thinkpad_acpi的模块信息，看看能不能启用控制接口了。</p>
+<p><code># modinfo thinkpad_acpi</code></p>
+<p>可以看到该模块提供了以下参数：</p>
+<pre><code>parm:           experimental:Enables experimental features when non-zero (int)
+parm:           debug:Sets debug level bit-mask (uint)
+parm:           force_load:Attempts to load the driver even on a mis-identified ThinkPad when true (bool)
+parm:           fan_control:Enables setting fan parameters features when true (bool)
+parm:           brightness_mode:Selects brightness control strategy: 0=auto, 1=EC, 2=UCMS, 3=EC+NVRAM (uint)
+parm:           brightness_enable:Enables backlight control when 1, disables when 0 (uint)
+parm:           volume_mode:Selects volume control strategy: 0=auto, 1=EC, 2=N/A, 3=EC+NVRAM (uint)
+parm:           volume_capabilities:Selects the mixer capabilities: 0=auto, 1=volume and mute, 2=mute only (uint)
+parm:           volume_control:Enables software override for the console audio control when true (bool)
+parm:           software_mute:Request full software mute control (bool)
+parm:           index:ALSA index for the ACPI EC Mixer (int)
+parm:           id:ALSA id for the ACPI EC Mixer (charp)
+parm:           enable:Enable the ALSA interface for the ACPI EC Mixer (bool)
+parm:           hotkey:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           bluetooth:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           video:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           light:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           cmos:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           led:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           beep:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           brightness:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           volume:Simulates thinkpad-acpi procfs command at module load, see documentation
+parm:           fan:Simulates thinkpad-acpi procfs command at module load, see documentation
+</code></pre>
+<p>其中如下的参数表明是可以开启风扇控制接口的：</p>
+<p><code>parm:           fan_control:Enables setting fan parameters features when true (bool)</code></p>
+<p>添加以下配置文件，并在其中添加相应配置项：</p>
+<p><code>vim /etc/modprobe.d/thinkpad_acpi.conf</code></p>
+<p>配置项内容为：</p>
+<p><code>options thinkpad_acpi fan_control=1</code></p>
+<p>重启系统或者执行以下命令重新加载模块：</p>
+<pre><code>rmmod thinkpad_acpi
+modprobe thinkpad_acpi
+</code></pre>
+<p>这时再次查看风扇驱动程序：</p>
+<p><code># cat /proc/acpi/ibm/fan</code></p>
+<p>即可看到更丰富的信息，多了commands相关的接口信息：</p>
+<pre><code>status:         enabled
+speed:          2585
+level:          auto
+commands:       level &lt;level&gt; (&lt;level&gt; is 0-7, auto, disengaged, full-speed)
+commands:       enable, disable
+commands:       watchdog &lt;timeout&gt; (&lt;timeout&gt; is 0 (off), 1-120 (seconds))
+</code></pre>
+<p>当我想把风扇转速调高时，就可以执行以下命令：</p>
+<p><code># echo 5 &gt; /proc/acpi/ibm/fan</code></p>
+<p>再次查看，风扇转速上去了，声音也更大了...</p>
+<pre><code>status:         enabled
+speed:          4587
+level:          5
+commands:       level &lt;level&gt; (&lt;level&gt; is 0-7, auto, disengaged, full-speed)
+commands:       enable, disable
+commands:       watchdog &lt;timeout&gt; (&lt;timeout&gt; is 0 (off), 1-120 (seconds))
+</code></pre>
+<p>跑一段时间后，记得把风扇调回自动档，降噪节能。</p>
+<p><code># echo auto &gt; /proc/acpi/ibm/fan</code></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="arch_linux_install/browser.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         
 
                         
@@ -178,6 +257,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="arch_linux_install/browser.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 

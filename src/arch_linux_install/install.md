@@ -28,7 +28,7 @@
   * 系统分区，存放操作系统及所有其他后续文件。
 
 #### 挂载分区
-* 挂载主分区，`# mount /dev/root_partition /mnt`
+* 挂载主分区，`# mount /dev/ _root_partition_ /mnt`
 * 挂载EFI
   * 先创建efi目录，`# mkdir /mnt/efi`
   * 挂载，`mount /dev/efi_partition /mnt/efi`

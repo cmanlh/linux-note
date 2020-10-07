@@ -11,3 +11,4 @@
   - [安装输入法](./arch_linux_install/input_method.md)
   - [安装声音相关控件](./arch_linux_install/audio.md)
   - [安装浏览器](./arch_linux_install/browser.md)
+- [Linux内核模块](./kernel_module.md)

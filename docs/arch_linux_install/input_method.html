@@ -93,7 +93,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../arch_linux_install.html"><strong aria-hidden="true">1.</strong> Arch Linux安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 制作安装盘</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 安装内核镜像</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows.html"><strong aria-hidden="true">1.3.</strong> 安装窗口系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/xorg.html"><strong aria-hidden="true">1.3.1.</strong> 安装Xorg</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/driver.html"><strong aria-hidden="true">1.3.2.</strong> 安装显卡驱动</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/font.html"><strong aria-hidden="true">1.3.3.</strong> 安装字体</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/dwm.html"><strong aria-hidden="true">1.3.4.</strong> 安装dwm</a></li></ol></li><li class="chapter-item expanded "><a href="../arch_linux_install/input_method.html" class="active"><strong aria-hidden="true">1.4.</strong> 安装输入法</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/audio.html"><strong aria-hidden="true">1.5.</strong> 安装声音相关控件</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/browser.html"><strong aria-hidden="true">1.6.</strong> 安装浏览器</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../arch_linux_install.html"><strong aria-hidden="true">1.</strong> Arch Linux安装</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../arch_linux_install/bootable_usb.html"><strong aria-hidden="true">1.1.</strong> 制作安装盘</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/install.html"><strong aria-hidden="true">1.2.</strong> 安装内核镜像</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows.html"><strong aria-hidden="true">1.3.</strong> 安装窗口系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/xorg.html"><strong aria-hidden="true">1.3.1.</strong> 安装Xorg</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/driver.html"><strong aria-hidden="true">1.3.2.</strong> 安装显卡驱动</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/font.html"><strong aria-hidden="true">1.3.3.</strong> 安装字体</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/xwindows/dwm.html"><strong aria-hidden="true">1.3.4.</strong> 安装dwm</a></li></ol></li><li class="chapter-item expanded "><a href="../arch_linux_install/input_method.html" class="active"><strong aria-hidden="true">1.4.</strong> 安装输入法</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/audio.html"><strong aria-hidden="true">1.5.</strong> 安装声音相关控件</a></li><li class="chapter-item expanded "><a href="../arch_linux_install/browser.html"><strong aria-hidden="true">1.6.</strong> 安装浏览器</a></li></ol></li><li class="chapter-item expanded "><a href="../kernel_module.html"><strong aria-hidden="true">2.</strong> Linux内核模块</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -159,7 +159,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#安装输入法" id="安装输入法">安装输入法</a></h1>
+                        <h2><a class="header" href="#安装输入法" id="安装输入法">安装输入法</a></h2>
+<p>输入法软件分为输入引擎框架和具体输入法实现：</p>
+<p>引擎框架，选择<a href="https://wiki.archlinux.org/index.php/Fcitx">fcitx</a></p>
+<p><code># pacman -S fcitx</code></p>
+<p>具体输入法，选择<a href="https://github.com/fcitx/fcitx-googlepinyin">fcitx-googlepinyin</a></p>
+<p><code># pacman -S fcitx-googlepinyin</code></p>
+<p>本来实现想选择搜狗拼音，但好像有bug，用着用着就卡死了，所以卸载，装回了googlepinyin。</p>
+<p>安装输入法管理软件</p>
+<p><code># pacman -S fcitx-configtool</code></p>
+<p>安装完管理软件后，输入下面命令即可按需对输入法进行配置了，比如快捷键什么的。</p>
+<p><code># fcitx-configtool</code></p>
 
                     </main>
 
