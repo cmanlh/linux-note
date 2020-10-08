@@ -53,3 +53,9 @@ exec xterm -geometry 80x66+0+0 -name login
 `# startx`
 
 进入窗口环境后，按 _Shirt+Alt+Enter_ 即可打开窗口，具体dwm的快捷键可以查看源码文件 _config.h_ 。
+
+启用双显示器：
+
+`# xrandr --output LVDS1 --auto --output VGA1 --auto --rotate inverted --right-of LVDS1`
+
+在dwm状态栏显示一些系统信息，比如系统时间、内存使用情况等等。脚本名称为dwmstatus.zsh，可在dwm我的fork地址的custom分支获得。
